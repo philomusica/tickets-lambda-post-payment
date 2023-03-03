@@ -6,7 +6,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/sesv2/sesv2iface"
 	"github.com/philomusica/tickets-lambda-get-concerts/lib/databaseHandler"
 	"github.com/philomusica/tickets-lambda-post-payment/lib/emailHandler/sesEmailHandler"
-	"github.com/philomusica/tickets-lambda-post-payment/lib/paymentHandler"
+	"github.com/philomusica/tickets-lambda-basket-service/lib/paymentHandler"
 )
 
 type mockGenerateTicketPDFSuccess struct {

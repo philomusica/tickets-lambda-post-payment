@@ -8,8 +8,6 @@ github.com/jmespath/go-jmespath v0.4.0 h1:BEgLn5cpjn8UN1mAw4NjwDrS35OdebyEtFe+9Y
 github.com/jmespath/go-jmespath v0.4.0/go.mod h1:T8mJZnbsbmF+m6zOOFylbeCJqk5+pHWvzYPziyZiYoo=
 github.com/jmespath/go-jmespath/internal/testify v1.5.1 h1:shLQSRRSCCPj3f2gpwzGwWFoC7ycTf1rcQZHOlsJ6N8=
 github.com/jmespath/go-jmespath/internal/testify v1.5.1/go.mod h1:L3OGu8Wl2/fWfCI6z80xFu9LTZmf1ZRjMHUOPmWr69U=
-github.com/philomusica/tickets-lambda-basket-service v1.2.4 h1:nvcR7+F6brdLUxRtZOLeUhUhwT8+kZZSLIudyKrFrdg=
-github.com/philomusica/tickets-lambda-basket-service v1.2.4/go.mod h1:IeRC90Zy0SerTd5Lw5pvlZ57PVZvAYSiEup7nll58KY=
 github.com/philomusica/tickets-lambda-basket-service v1.3.0 h1:xtdzUGJmRMq2bviq7SSMg2zbojDnfUHejVog9cak9qI=
 github.com/philomusica/tickets-lambda-basket-service v1.3.0/go.mod h1:2Qk4yextQK8PVXQOHlM72ckWxIOqhRyL2Z6XJZWR3tg=
 github.com/philomusica/tickets-lambda-get-concerts v1.7.0 h1:g9VSUd/jRV7xTSReNtgCCHPpW6/ViZcye5O3k/W2Ck0=
