@@ -2,6 +2,8 @@ github.com/aws/aws-lambda-go v1.38.0 h1:4CUdxGzvuQp0o8Zh7KtupB9XvCiiY8yKqJtzco+g
 github.com/aws/aws-lambda-go v1.38.0/go.mod h1:jwFe2KmMsHmffA1X2R09hH6lFzJQxzI8qK17ewzbQMM=
 github.com/aws/aws-sdk-go v1.44.213 h1:WahquyWs7cQdz0vpDVWyWETEemgSoORx0PbWL9oz2WA=
 github.com/aws/aws-sdk-go v1.44.213/go.mod h1:aVsgQcEevwlmQ7qHE9I3h+dtQgpqhFB+i8Phjh7fkwI=
+github.com/aws/aws-sdk-go v1.44.214 h1:YzDuC+9UtrAOUkItlK7l3BvKI9o6qAog9X8i289HORc=
+github.com/aws/aws-sdk-go v1.44.214/go.mod h1:aVsgQcEevwlmQ7qHE9I3h+dtQgpqhFB+i8Phjh7fkwI=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/jmespath/go-jmespath v0.4.0 h1:BEgLn5cpjn8UN1mAw4NjwDrS35OdebyEtFe+9YPoQUg=
@@ -10,8 +12,12 @@ github.com/jmespath/go-jmespath/internal/testify v1.5.1 h1:shLQSRRSCCPj3f2gpwzGw
 github.com/jmespath/go-jmespath/internal/testify v1.5.1/go.mod h1:L3OGu8Wl2/fWfCI6z80xFu9LTZmf1ZRjMHUOPmWr69U=
 github.com/philomusica/tickets-lambda-basket-service v1.3.2 h1:kwQYtOs96/1YYFl7pR5lA+zNUdmNIZCo7b5Au8CnmNI=
 github.com/philomusica/tickets-lambda-basket-service v1.3.2/go.mod h1:Qh7zGeyTL3lucKpnrSFqK6vjdQXUqY+Z2gaan9fxgCM=
+github.com/philomusica/tickets-lambda-basket-service v1.3.3 h1:X2G1vxGIWBzB0wt15bpNRYQturr/67iJmVEcug7j7NU=
+github.com/philomusica/tickets-lambda-basket-service v1.3.3/go.mod h1:9EqXVlZ7JRzAThjzppNGSiyDHw3ibFYwKlR6zM5s3mU=
 github.com/philomusica/tickets-lambda-get-concerts v1.7.2 h1:tcfffAl4JFWyUYo6iWEqTLZ7/9rTvmQIFG1cgEppchI=
 github.com/philomusica/tickets-lambda-get-concerts v1.7.2/go.mod h1:xbDDKzS6tEapGf5LhYkfSWeUjhKxbuotTUs5Ul9wN8I=
+github.com/philomusica/tickets-lambda-get-concerts v1.7.3 h1:2QiziVOUoCTJcFK32dpNo9XWP6ycSB2jtrnZ2gcQEkE=
+github.com/philomusica/tickets-lambda-get-concerts v1.7.3/go.mod h1:xbDDKzS6tEapGf5LhYkfSWeUjhKxbuotTUs5Ul9wN8I=
 github.com/phpdave11/gofpdi v1.0.14-0.20211212211723-1f10f9844311 h1:zyWXQ6vu27ETMpYsEMAsisQ+GqJ4e1TPvSNfdOPF0no=
 github.com/phpdave11/gofpdi v1.0.14-0.20211212211723-1f10f9844311/go.mod h1:vBmVV0Do6hSBHC8uKUQ71JGW+ZGQq74llk/7bXwjDoI=
 github.com/pkg/errors v0.8.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=

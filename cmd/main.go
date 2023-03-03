@@ -76,10 +76,10 @@ func postPaymentHandler(request events.APIGatewayProxyRequest, dbHandler databas
 
 	for _, order := range orders {
 		// Update order in table to show complete
-		err = dbHandler.UpdateOrderInTable(order.ConcertId, order.Reference, "complete")
+		err = dbHandler.UpdateOrderInTable(order.ConcertID, order.Reference, "complete")
 
 		// Update concert table with number of sold tickets
-		err = dbHandler.UpdateTicketsSoldInTable(order.ConcertId, uint16(order.NumOfFullPrice+order.NumOfConcessions))
+		err = dbHandler.UpdateTicketsSoldInTable(order.ConcertID, uint16(order.NumOfFullPrice+order.NumOfConcessions))
 		if err != nil {
 			fmt.Println(err)
 			return
@@ -93,7 +93,7 @@ func postPaymentHandler(request events.APIGatewayProxyRequest, dbHandler databas
 		}
 
 		var concert *databaseHandler.Concert
-		concert, err = dbHandler.GetConcertFromTable(order.ConcertId)
+		concert, err = dbHandler.GetConcertFromTable(order.ConcertID)
 		if err != nil {
 			fmt.Printf("Unable to get concert from concerts table: %T\n", err)
 			return
