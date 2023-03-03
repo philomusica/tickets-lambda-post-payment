@@ -1,8 +1,8 @@
 package emailHandler
 
 import (
-	"github.com/philomusica/tickets-lambda-get-concerts/lib/databaseHandler"
 	"github.com/philomusica/tickets-lambda-basket-service/lib/paymentHandler"
+	"github.com/philomusica/tickets-lambda-get-concerts/lib/databaseHandler"
 )
 
 type EmailHandler interface {

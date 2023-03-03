@@ -8,8 +8,8 @@ import (
 
 	"github.com/aws/aws-sdk-go/service/sesv2"
 	"github.com/aws/aws-sdk-go/service/sesv2/sesv2iface"
-	"github.com/philomusica/tickets-lambda-get-concerts/lib/databaseHandler"
 	"github.com/philomusica/tickets-lambda-basket-service/lib/paymentHandler"
+	"github.com/philomusica/tickets-lambda-get-concerts/lib/databaseHandler"
 	"github.com/signintech/gopdf"
 	"github.com/skip2/go-qrcode"
 	"gopkg.in/gomail.v2"
