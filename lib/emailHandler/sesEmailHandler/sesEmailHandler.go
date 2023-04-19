@@ -137,7 +137,7 @@ func (s SESEmailHandler) SendEmail(order paymentHandler.Order, attachment []byte
 	msg.SetHeader("To", order.Email)
 	msg.SetHeader("From", s.senderAddress)
 	msg.SetHeader("Subject", "Order Confirmation")
-	msg.SetBody("text/html", fmt.Sprintf("Dear %s\n\nMany thanks for purchasing tickets to Philomusica's concert. Your eTicket is attached as a PDF to this email. Please bring this PDF with you to the concert, either in digital or paper form.\nWe look forward to seeing you there!\n\nPhilomusica\n\nPlease consider the enviornment before printing your eTicket", order.FirstName))
+	msg.SetBody("text/html", fmt.Sprintf("<div>Dear %s</div><br><div>Many thanks for purchasing tickets to Philomusica's concert. Your eTicket is attached as a PDF to this email. Please bring this PDF with you to the concert, either in digital or paper form.</div><br><div>We look forward to seeing you there!</div><div>Philomusica</div><br><br><div>Please consider the enviornment before printing your eTicket</div>", order.FirstName))
 	msg.Attach(
 		"philomusica-concert-tickets.pdf",
 		gomail.SetCopyFunc(func(w io.Writer) error {
