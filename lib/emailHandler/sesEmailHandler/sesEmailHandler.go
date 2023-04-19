@@ -111,14 +111,14 @@ func (s SESEmailHandler) GenerateTicketPDF(order paymentHandler.Order, concert d
 
 	if includeQRCode && redeemTicketURL != "" {
 		var qrcodeImage []byte
-		qrcodeImage, _ = qrcode.Encode(fmt.Sprintf("%s/%s/%s", redeemTicketURL, concert.ID, order.Reference), qrcode.Medium, 360)
+		qrcodeImage, _ = qrcode.Encode(fmt.Sprintf("%s/%s/%s", redeemTicketURL, concert.ID, order.OrderReference), qrcode.Medium, 360)
 		ih, _ := gopdf.ImageHolderByBytes(qrcodeImage)
 		pdf.ImageByHolder(ih, gopdf.PageSizeA4.W/2+30.0, pdf.GetY(), nil)
 	}
 
 	addDetailToPDF(&pdf, "Date", fmt.Sprintf("%s @ %s", concert.Date, concert.Time))
 	addDetailToPDF(&pdf, "Name", fmt.Sprintf("%s %s", order.FirstName, order.LastName))
-	addDetailToPDF(&pdf, "Reference", order.Reference)
+	addDetailToPDF(&pdf, "Reference", order.OrderReference)
 	addDetailToPDF(&pdf, "Admit", buildAdmitString(order))
 	return pdf.GetBytesPdf()
 }

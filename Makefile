@@ -16,11 +16,11 @@ deps:
 clean:
 	rm -rf $(BINDIR)
 
-deploy: build
+deploy: $(BINARY)
 ifeq ($(ARN),)
 	@echo "Please set the ARN"
 else
-	zip -r $(ZIPFILE) $(BINDIR)
+	zip -r $(ZIPFILE) $(BINDIR) ./*.ttf
 	aws lambda update-function-code --function-name $(ARN) --zip-file fileb://$(ZIPFILE)
 endif
 

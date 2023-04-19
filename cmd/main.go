@@ -38,6 +38,7 @@ import (
 
 // postPaymentHandler takes the events.APIGatewayProxyRequest struct, the databaseHandler, stripeHandler and sesHandler, parse the JSON object from Stripe, updates the Orders table to with payment status set to "complete", updates the number of tickets sold for the relevant concert(s), generates a PDF eticket and emails the customer with the PDF attached, it returns an events.APIGatewayProxyResponse and error which should be passed on by the lambda Handler function
 func postPaymentHandler(request events.APIGatewayProxyRequest, dbHandler databaseHandler.DatabaseHandler, paymentHandler paymentHandler.PaymentHandler, emailHandler emailHandler.EmailHandler) (response events.APIGatewayProxyResponse, err error) {
+	fmt.Println("postPaymentHandler called")
 	response.StatusCode = 500
 	response.Body = "Error processing webhook"
 
@@ -69,14 +70,14 @@ func postPaymentHandler(request events.APIGatewayProxyRequest, dbHandler databas
 
 	reference := paymentIntent.Metadata["order_reference"]
 	orders, err := dbHandler.GetOrdersByOrderReferenceFromTable(reference)
-	if err != nil {
+	if err != nil || len(orders) == 0 {
 		fmt.Printf("Unable to get orders by reference id: %T\n", err)
 		return
 	}
 
 	for _, order := range orders {
 		// Update order in table to show complete
-		err = dbHandler.UpdateOrderInTable(order.ConcertID, order.Reference, "complete")
+		err = dbHandler.UpdateOrderInTable(order.ConcertID, order.OrderReference, "complete")
 
 		// Update concert table with number of sold tickets
 		err = dbHandler.UpdateTicketsSoldInTable(order.ConcertID, uint16(order.NumOfFullPrice+order.NumOfConcessions))
@@ -84,7 +85,6 @@ func postPaymentHandler(request events.APIGatewayProxyRequest, dbHandler databas
 			fmt.Println(err)
 			return
 		}
-
 		// Generate QR code
 		redeemTicketURL := os.Getenv("REDEEM_TICKET_API")
 		if redeemTicketURL == "" {
@@ -97,6 +97,11 @@ func postPaymentHandler(request events.APIGatewayProxyRequest, dbHandler databas
 		if err != nil {
 			fmt.Printf("Unable to get concert from concerts table: %T\n", err)
 			return
+		}
+
+		err = dbHandler.ReformatDateTimeAndTickets(concert)
+		if err != nil {
+			fmt.Printf("Issue reformatting concert %v\n", err)
 		}
 
 		// Generate PDF tickets (injecting QR code)
@@ -113,6 +118,8 @@ func postPaymentHandler(request events.APIGatewayProxyRequest, dbHandler databas
 			return
 		}
 	}
+	response.Body = "Success"
+	response.StatusCode = 200
 	return
 }
 
@@ -121,6 +128,7 @@ func postPaymentHandler(request events.APIGatewayProxyRequest, dbHandler databas
 // ===============================================================================================================================
 
 func Handler(request events.APIGatewayProxyRequest) (response events.APIGatewayProxyResponse, err error) {
+	fmt.Println("Handler called")
 	sess, err := session.NewSession()
 	if err != nil {
 		fmt.Println(err)
@@ -136,6 +144,7 @@ func Handler(request events.APIGatewayProxyRequest) (response events.APIGatewayP
 		fmt.Println("CONCERTS_TABLE ORDERS_TABLE SENDER_ADDRESS and STRIPE_SECRET all need to be set as environment variables")
 		return
 	}
+	fmt.Println("env vars all ok")
 	dynamoHandler := ddbHandler.New(ddbsvc, concertsTable, ordersTable)
 	stripeHandler := stripePaymentHandler.New(stripeSecret)
 	sesHandler := sesEmailHandler.New(sessvc, senderAddress)

@@ -28,7 +28,7 @@ func TestGenerateTicketPDF(t *testing.T) {
 
 	order := paymentHandler.Order{
 		ConcertID:        "1234",
-		Reference:        "ABC1234",
+		OrderReference:        "ABC1234",
 		FirstName:        "John",
 		LastName:         "Smith",
 		Email:            "johnsmith@mail.com",
