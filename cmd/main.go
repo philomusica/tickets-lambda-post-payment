@@ -109,7 +109,10 @@ func postPaymentHandler(request events.APIGatewayProxyRequest, dbHandler databas
 		err = processFailedPayment(orders, dbHandler, emailHandler)
 		if err != nil {
 			fmt.Println(err)
+			return
 		}
+		response.Body = "Success"
+		response.StatusCode = 200
 		return
 	}
 
