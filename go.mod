@@ -4,9 +4,9 @@ go 1.20
 
 require (
 	github.com/aws/aws-lambda-go v1.40.0
-	github.com/aws/aws-sdk-go v1.44.245
-	github.com/philomusica/tickets-lambda-basket-service v1.3.4
-	github.com/philomusica/tickets-lambda-get-concerts v1.7.7
+	github.com/aws/aws-sdk-go v1.44.246
+	github.com/philomusica/tickets-lambda-basket-service v1.3.5
+	github.com/philomusica/tickets-lambda-get-concerts v1.7.12
 	github.com/signintech/gopdf v0.16.1
 	github.com/skip2/go-qrcode v0.0.0-20200617195104-da1b6568686e
 	github.com/stripe/stripe-go/v74 v74.15.0

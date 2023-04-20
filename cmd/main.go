@@ -21,6 +21,19 @@ import (
 )
 
 // ===============================================================================================================================
+// GLOBAL VARIABLES
+// ===============================================================================================================================
+
+const (
+	PROCESSING string = "processing"
+	COMPLETE string = "complete"
+	PAYMENT_FAILED string = "payment-failed"
+)
+// ===============================================================================================================================
+// END GLOBAL VARIABLES
+// ===============================================================================================================================
+
+// ===============================================================================================================================
 // TYPE DEFINITIONS
 // ===============================================================================================================================
 
@@ -35,6 +48,23 @@ import (
 // ===============================================================================================================================
 // END PRIVATE FUNCTIONS
 // ===============================================================================================================================
+
+func processFailedPayment(orders []paymentHandler.Order, dbHandler databaseHandler.DatabaseHandler, emailHandler emailHandler.EmailHandler) (err error) {
+
+	for _, order := range orders {
+		fmt.Printf("calling UpdateOrderInTable with %s, %s, %s\n", order.ConcertID, order.OrderReference, PAYMENT_FAILED)
+		err = dbHandler.UpdateOrderInTable(order.ConcertID, order.OrderReference, PAYMENT_FAILED)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+	}
+
+	if len(orders) != 0 {
+		err = emailHandler.SendPaymentFailureEmail(orders[0])
+	}
+	return
+}
 
 // postPaymentHandler takes the events.APIGatewayProxyRequest struct, the databaseHandler, stripeHandler and sesHandler, parse the JSON object from Stripe, updates the Orders table to with payment status set to "complete", updates the number of tickets sold for the relevant concert(s), generates a PDF eticket and emails the customer with the PDF attached, it returns an events.APIGatewayProxyResponse and error which should be passed on by the lambda Handler function
 func postPaymentHandler(request events.APIGatewayProxyRequest, dbHandler databaseHandler.DatabaseHandler, paymentHandler paymentHandler.PaymentHandler, emailHandler emailHandler.EmailHandler) (response events.APIGatewayProxyResponse, err error) {
@@ -75,9 +105,31 @@ func postPaymentHandler(request events.APIGatewayProxyRequest, dbHandler databas
 		return
 	}
 
+	if event.Type == "payment_intent.payment_failed" {
+		err = processFailedPayment(orders, dbHandler, emailHandler)
+		if err != nil {
+			fmt.Println(err)
+		}
+		return
+	}
+
 	for _, order := range orders {
 		// Update order in table to show complete
-		err = dbHandler.UpdateOrderInTable(order.ConcertID, order.OrderReference, "complete")
+		if event.Type == "payment_intent.processing" {
+			err = dbHandler.UpdateOrderInTable(order.ConcertID, order.OrderReference, PROCESSING)
+		} else if event.Type == "payment_intent.succeeded" {
+			err = dbHandler.UpdateOrderInTable(order.ConcertID, order.OrderReference, COMPLETE)
+		}
+
+		if err != nil {
+			fmt.Printf("Error updating order in table: %v\n", err)
+			return
+		}
+
+		// If status was processing, user will have already received email, etc, so nothing more to be done
+		if order.OrderStatus == "processing" {
+			continue
+		}
 
 		// Update concert table with number of sold tickets
 		err = dbHandler.UpdateTicketsSoldInTable(order.ConcertID, uint16(order.NumOfFullPrice+order.NumOfConcessions))

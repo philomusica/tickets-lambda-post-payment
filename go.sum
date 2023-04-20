@@ -8,6 +8,8 @@ github.com/aws/aws-sdk-go v1.44.214 h1:YzDuC+9UtrAOUkItlK7l3BvKI9o6qAog9X8i289HO
 github.com/aws/aws-sdk-go v1.44.214/go.mod h1:aVsgQcEevwlmQ7qHE9I3h+dtQgpqhFB+i8Phjh7fkwI=
 github.com/aws/aws-sdk-go v1.44.245 h1:KtY2s4q31/kn33AdV63R5t77mdxsI7rq3YT7Mgo805M=
 github.com/aws/aws-sdk-go v1.44.245/go.mod h1:aVsgQcEevwlmQ7qHE9I3h+dtQgpqhFB+i8Phjh7fkwI=
+github.com/aws/aws-sdk-go v1.44.246 h1:iLxPX6JU0bxAci9R6/bp8rX0kL871ByCTx0MZlQWv1U=
+github.com/aws/aws-sdk-go v1.44.246/go.mod h1:aVsgQcEevwlmQ7qHE9I3h+dtQgpqhFB+i8Phjh7fkwI=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/jmespath/go-jmespath v0.4.0 h1:BEgLn5cpjn8UN1mAw4NjwDrS35OdebyEtFe+9YPoQUg=
@@ -20,6 +22,8 @@ github.com/philomusica/tickets-lambda-basket-service v1.3.3 h1:X2G1vxGIWBzB0wt15
 github.com/philomusica/tickets-lambda-basket-service v1.3.3/go.mod h1:9EqXVlZ7JRzAThjzppNGSiyDHw3ibFYwKlR6zM5s3mU=
 github.com/philomusica/tickets-lambda-basket-service v1.3.4 h1:9KpH8OmzKUZsXEJkNcPqCmO5dM2OCtqWZVGXGJJQzAE=
 github.com/philomusica/tickets-lambda-basket-service v1.3.4/go.mod h1:IxxCa4B+Tn1xpHhE4nUTchz4FMXj3eeWgnqyB/Q5+SM=
+github.com/philomusica/tickets-lambda-basket-service v1.3.5 h1:udg236/qChRzTORNbEEXxNaj6qqUn6akbfeA/nOxMdo=
+github.com/philomusica/tickets-lambda-basket-service v1.3.5/go.mod h1:IxxCa4B+Tn1xpHhE4nUTchz4FMXj3eeWgnqyB/Q5+SM=
 github.com/philomusica/tickets-lambda-get-concerts v1.7.2 h1:tcfffAl4JFWyUYo6iWEqTLZ7/9rTvmQIFG1cgEppchI=
 github.com/philomusica/tickets-lambda-get-concerts v1.7.2/go.mod h1:xbDDKzS6tEapGf5LhYkfSWeUjhKxbuotTUs5Ul9wN8I=
 github.com/philomusica/tickets-lambda-get-concerts v1.7.3 h1:2QiziVOUoCTJcFK32dpNo9XWP6ycSB2jtrnZ2gcQEkE=
@@ -28,6 +32,16 @@ github.com/philomusica/tickets-lambda-get-concerts v1.7.6 h1:CM1hMgDnnxu5I7QzZoQ
 github.com/philomusica/tickets-lambda-get-concerts v1.7.6/go.mod h1:TOJ7WRDG5b/GemMzECNkAWfpjjgSIWIqbdFxAiE0xl4=
 github.com/philomusica/tickets-lambda-get-concerts v1.7.7 h1:pul7miafzIgm+9DHnaZzgMIbACZQS6QLr9d9ASMzCKo=
 github.com/philomusica/tickets-lambda-get-concerts v1.7.7/go.mod h1:TOJ7WRDG5b/GemMzECNkAWfpjjgSIWIqbdFxAiE0xl4=
+github.com/philomusica/tickets-lambda-get-concerts v1.7.8 h1:iCVlujgsNBPS8pxfqyaAoJoLMkI+DPQhuUreNimsedQ=
+github.com/philomusica/tickets-lambda-get-concerts v1.7.8/go.mod h1:7KQSoG6hpBtAQt5u1lFmHUrn9O6o9EMIFSXhqN/KsI0=
+github.com/philomusica/tickets-lambda-get-concerts v1.7.9 h1:nxL23raClN4S/Ykd9P/6VY+fvwBgq1uzc7nqhSJ0RwQ=
+github.com/philomusica/tickets-lambda-get-concerts v1.7.9/go.mod h1:7KQSoG6hpBtAQt5u1lFmHUrn9O6o9EMIFSXhqN/KsI0=
+github.com/philomusica/tickets-lambda-get-concerts v1.7.10 h1:nvkOTffnFLknHM47jGYHQoprsw3e25oMcVdNdFNfE2o=
+github.com/philomusica/tickets-lambda-get-concerts v1.7.10/go.mod h1:7KQSoG6hpBtAQt5u1lFmHUrn9O6o9EMIFSXhqN/KsI0=
+github.com/philomusica/tickets-lambda-get-concerts v1.7.11 h1:0kg81awhXLCRYV5ZoPOA8VpW9oAda3S3meRtuGh279s=
+github.com/philomusica/tickets-lambda-get-concerts v1.7.11/go.mod h1:7KQSoG6hpBtAQt5u1lFmHUrn9O6o9EMIFSXhqN/KsI0=
+github.com/philomusica/tickets-lambda-get-concerts v1.7.12 h1:19xedfqYF6unZ4br6asooDnXQ9c3I9A0rVPBSqGjLbY=
+github.com/philomusica/tickets-lambda-get-concerts v1.7.12/go.mod h1:FpMrc2uIxoKfvo7iIgmxkO751ifg/aoRyElkZ5cvRuI=
 github.com/phpdave11/gofpdi v1.0.14-0.20211212211723-1f10f9844311 h1:zyWXQ6vu27ETMpYsEMAsisQ+GqJ4e1TPvSNfdOPF0no=
 github.com/phpdave11/gofpdi v1.0.14-0.20211212211723-1f10f9844311/go.mod h1:vBmVV0Do6hSBHC8uKUQ71JGW+ZGQq74llk/7bXwjDoI=
 github.com/pkg/errors v0.8.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=

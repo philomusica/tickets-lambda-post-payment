@@ -6,6 +6,7 @@ import (
 	"io"
 	"strings"
 
+	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/sesv2"
 	"github.com/aws/aws-sdk-go/service/sesv2/sesv2iface"
 	"github.com/philomusica/tickets-lambda-basket-service/lib/paymentHandler"
@@ -163,6 +164,33 @@ func (s SESEmailHandler) SendEmail(order paymentHandler.Order, attachment []byte
 		},
 	)
 
+	return
+}
+
+func (s SESEmailHandler) SendPaymentFailureEmail(order paymentHandler.Order) (err error) {
+	subject := "Ticket payment failed"
+	htmlBody := fmt.Sprintf(`<div>Dear %s</div><br><div>Unfortuantely we were unable to process your payment. Please try again, and if you continue to have problems please <a href="https://philomusica.org.uk/contact.html">contact us</a></div><br><div>Many thanks</div><div>Philomusica</div>`, order.FirstName)
+
+	_, err = s.svc.SendEmail(
+		&sesv2.SendEmailInput{
+			Content: &sesv2.EmailContent{
+				Simple: &sesv2.Message{
+					Body: &sesv2.Body{
+						Html: &sesv2.Content{
+							Data: aws.String(htmlBody),
+						},
+					},
+					Subject: &sesv2.Content{
+						Data: aws.String(subject),
+					},
+				},
+			},
+			Destination: &sesv2.Destination{
+				ToAddresses: []*string{&order.Email},
+			},
+			FromEmailAddress: &s.senderAddress,
+		},
+	)
 	return
 }
 
