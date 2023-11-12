@@ -10,12 +10,12 @@ import (
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
 	"github.com/aws/aws-sdk-go/service/sesv2"
-	"github.com/philomusica/tickets-lambda-basket-service/lib/paymentHandler"
-	"github.com/philomusica/tickets-lambda-basket-service/lib/paymentHandler/stripePaymentHandler"
-	"github.com/philomusica/tickets-lambda-get-concerts/lib/databaseHandler"
-	"github.com/philomusica/tickets-lambda-get-concerts/lib/databaseHandler/ddbHandler"
-	"github.com/philomusica/tickets-lambda-post-payment/lib/emailHandler"
-	"github.com/philomusica/tickets-lambda-post-payment/lib/emailHandler/sesEmailHandler"
+	"github.com/philomusica/tickets-lambda-utils/lib/databaseHandler"
+	"github.com/philomusica/tickets-lambda-utils/lib/databaseHandler/ddbHandler"
+	"github.com/philomusica/tickets-lambda-utils/lib/emailHandler"
+	"github.com/philomusica/tickets-lambda-utils/lib/emailHandler/sesEmailHandler"
+	"github.com/philomusica/tickets-lambda-utils/lib/paymentHandler"
+	"github.com/philomusica/tickets-lambda-utils/lib/paymentHandler/stripePaymentHandler"
 	"github.com/stripe/stripe-go/v74"
 	"github.com/stripe/stripe-go/v74/webhook"
 )
@@ -141,12 +141,6 @@ func postPaymentHandler(request events.APIGatewayProxyRequest, dbHandler databas
 			return
 		}
 		// Generate QR code
-		redeemTicketURL := os.Getenv("REDEEM_TICKET_API")
-		if redeemTicketURL == "" {
-			fmt.Printf("redeemTicketURL not set\n")
-			return
-		}
-
 		var concert *databaseHandler.Concert
 		concert, err = dbHandler.GetConcertFromTable(order.ConcertID)
 		if err != nil {
@@ -154,20 +148,24 @@ func postPaymentHandler(request events.APIGatewayProxyRequest, dbHandler databas
 			return
 		}
 
+		dateTime := concert.DateTime
+
 		err = dbHandler.ReformatDateTimeAndTickets(concert)
 		if err != nil {
 			fmt.Printf("Issue reformatting concert %v\n", err)
 		}
 
 		// Generate PDF tickets (injecting QR code)
-		attachment := emailHandler.GenerateTicketPDF(order, *concert, true, redeemTicketURL)
+		attachment := emailHandler.GenerateTicketPDF(order, *concert, true)
 		if err != nil {
 			fmt.Printf("Unable to generate QR code: %s\n", err)
 			return
 		}
 
+		calLinks := emailHandler.CreateCalendarInvites(concert.Title, concert.Location, *dateTime, concert.Description)
+
 		// Email user with PDF attached
-		err = emailHandler.SendEmail(order, attachment)
+		err = emailHandler.SendEmail(order, attachment, calLinks)
 		if err != nil {
 			fmt.Printf("Unable to send email: %s\n", err)
 			return
